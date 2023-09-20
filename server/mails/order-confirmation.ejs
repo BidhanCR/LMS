@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Confirmation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #333;
+        padding: 20px;
+        border: 1px solid gray;
+      }
+      .header {
+        background-color: #007bff;
+        color: #ffffff;
+        text-align: center;
+        padding: 10px 0;
+      }
+      .message {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .message h1 {
+        font-size: 28px;
+        margin: 0;
+      }
+      .message p {
+        font-size: 18px;
+        margin: 10px 0;
+      }
+      .order-details {
+        margin-top: 30px;
+      }
+      .order-details h4 {
+        font-size: 20px;
+        margin: 0;
+      }
+      .order-item {
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+        margin: 10px 0;
+      }
+      .order-item:last-child {
+        border-bottom: none;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 30px;
+        color: #777;
+      }
+      .footer a {
+        text-decoration: none;
+        color: #007bff;
+      }
+      .footer p {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Order Confirmation</h1>
+      </div>
+      <div class="message">
+        <h1>Your order has been confirmed!</h1>
+        <p>Thank you for choosing our services.</p>
+      </div>
+      <div class="order-details">
+        <h4>Order Details:</h4>
+        <div class="order-item"><strong>Order #:</strong> <%= order._id %></div>
+        <div class="order-item">
+          <strong>Order Date:</strong> <%= order.date %>
+        </div>
+        <div class="order-item"><strong>Item:</strong> <%= order.name %></div>
+        <div class="order-item"><strong>Quantity:</strong> 1</div>
+        <div class="order-item"><strong>Cost:</strong> $<%= order.price %></div>
+        <div class="order-item">
+          <strong>Total:</strong> $<%= order.price %>
+        </div>
+      </div>
+      <div class="footer">
+        <p>
+          If you have any questions, please contact our support team at
+          <a href="mailto:support@elearning.com">support@example.com</a>.
+        </p>
+        <p>&copy; 2023 E-Learning. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>
