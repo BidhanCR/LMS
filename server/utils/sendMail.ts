@@ -22,9 +22,10 @@ const sendMail = async(options: EmailOPtions): Promise<void> => {
     });
 
     const {email, subject, template, data}= options;
-
+    
     // get the path to the email template file
-    const templatePath = path.join(__dirname, "../mails/activation-mail.ejs");
+    const templatePath = path.join(__dirname, "../mails", template);
+ 
 
     // render the email template with ejs
     const html: string = await ejs.renderFile(templatePath, data);
