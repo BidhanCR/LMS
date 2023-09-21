@@ -11,3 +11,16 @@ export const  newOrder = CatchAsyncError(async(data:any, res:Response, next:Next
         order
     })
 })
+
+
+// get all orders -- only for admin
+
+// get all users
+export const getAllOrderService = async(res: Response)=> {
+    const orders = await OrderModel.find().sort({createdAt: -1});
+  
+    res.status(201).json({
+      success: true,
+      orders
+    })
+  }

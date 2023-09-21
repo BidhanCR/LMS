@@ -14,7 +14,7 @@ import {
   refreshTokenOptions,
   sendToken,
 } from "../utils/jwt";
-import { getUserById } from "../services/user.service";
+import { getAllUsersService, getUserById } from "../services/user.service";
 import cloudinary from "cloudinary";
 
 // register user
@@ -379,6 +379,18 @@ export const updateProfilePicture = CatchAsyncError(
         success: true,
         user,
       });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 400));
+    }
+  }
+);
+
+// get all users --- only for admin
+
+export const getAllUsers = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      getAllUsersService(res);
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 400));
     }
