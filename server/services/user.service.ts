@@ -24,3 +24,13 @@ export const getAllUsersService = async(res: Response)=> {
     users,
   })
 }
+
+// update user role -- only for admin
+export const updateUserRoleService = async(res: Response, id: String, role: String)=> {
+  const users = await userModel.findByIdAndUpdate(id, {role}, {new: true});
+
+  res.status(201).json({
+    success: true,
+    users,
+  })
+}

@@ -42,7 +42,7 @@ interface ICourse extends Document {
   level: string;
   demoUrl: string;
   benefits: { title: string }[];
-  prerequisites: {title: string}[];
+  prerequisites: { title: string }[];
   reviews: IReview[];
   courseData: ICourseData[];
   ratings?: number;
@@ -56,7 +56,7 @@ const reviewSchema = new Schema<IReview>({
     default: 0,
   },
   comment: String,
-  commentReplies: [Object]
+  commentReplies: [Object],
 });
 
 const linkSchema = new Schema<ILink>({
@@ -81,53 +81,54 @@ const courseDataSchema = new Schema<ICourseData>({
   questions: [commentSchema],
 });
 
-
-const courseSchema = new Schema<ICourse>({
+const courseSchema = new Schema<ICourse>(
+  {
     name: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     description: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     price: {
-        type: Number,
-        required: true,
-
+      type: Number,
+      required: true,
     },
     estimatedPrice: {
-        type: Number,
+      type: Number,
     },
     thumbnail: {
-        public_id: {
-            type:String
-        },
-        url: {
-            type:String
-        }
+      public_id: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
     },
     tags: {
-        required: true,
-        type:String
+      required: true,
+      type: String,
     },
     level: {
-        required: true,
-        type:String,
+      required: true,
+      type: String,
     },
-    benefits: [{title: String}],
-    prerequisites: [{title: String}],
+    benefits: [{ title: String }],
+    prerequisites: [{ title: String }],
     reviews: [reviewSchema],
     courseData: [courseDataSchema],
     ratings: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     purchased: {
-        type: Number,
-        default: 0 
-    }
-})
+      type: Number,
+      default: 0,
+    },
+  },
+  { timestamps: true }
+);
 
 const CourseModel: Model<ICourse> = mongoose.model("Course", courseSchema);
 export default CourseModel;
