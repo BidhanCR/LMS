@@ -6,27 +6,27 @@ type Props = {};
 
 const Hero: FC<Props> = (props) => {
   return (
-    <div className="w-full 1000px:flex items-center">
-      <div className="absolute top-[100px] 1000px:top-[unset] 1100px:h-[600px] 1100px:w-[600px] 1500px:h-[700px] 1500px:w-[700px] h-[50vh] w-[50vh] hero_animation ">
-        <div className="1000px:w-[40%] flex 1000px:min-h-screen items-center justify-end pt-[70px] 1000px:pt-[0] z-10">
+    <div className="w-full items-center">
+      <div className="flex flex-col md:flex-row items-center justify-center">
+        <div className="w-full hero_animation md:w-[40%] flex items-center justify-center">
           <Image
             src={require("../../../public/assets/banner-img-1.png")}
             alt=""
-            className="object-contain 1100px:max-w-[90%] w-[90%] 1500px:max-w-[85%] h-auto z-[10]"
+            className="object-contain rounded-full"
           />
         </div>
-        <div className="1000px:w-[60%] flex flex-col items-center 1000px:mt-[0px] text-center 1000px:text-left mt-[150px]">
-          <h2 className="dark:text-white text-[#000000c7] text-[30px] px-3 w-full 1000px:text-[70px] font-[600] font-Josefin py-2 1000px:leading-[75px]">
+        <div className="w-full md:w-[60%] flex flex-col items-center text-center mt-[150px]">
+          <h2 className="dark:text-white text-[#000000c7] text-[30px] px-3 w-full  font-[600] font-Josefin py-2 leading-[75px]">
             Improve Your Online Learning Experience Better Instantly
           </h2>
           <br />
-          <p className="dark:text-[#edfff4] text-[#000000ac] font-Josefin font-[600] text-[18px] 1500px:!w-[55%] 1100px:!w-[70%]">
+          <p className="dark:text-[#edfff4] text-[#000000ac] font-Josefin font-[600] text-[18px]">
             We have 40k+ Online courses & 500K+ Online registered student. Find
             Your desired courses from them.
           </p>
           <br />
           <br />
-          <div className="1500px:w-[55%] 1100px:w-[70px] w-[90%] h-[50px] bg-transparent relative">
+          <div className="bg-transparent relative">
             <input
               type="text"
               placeholder="Search Courses..."
@@ -38,7 +38,7 @@ const Hero: FC<Props> = (props) => {
           </div>
           <br />
           <br />
-          <div className="1500px:w-[55%] 1100px:w-[70%] w-[90%] flex items-center">
+          <div className="w-[90%] flex items-center">
             <Image
               src={require("../../../public/assets/client-3.jpg")}
               alt=""
@@ -54,11 +54,11 @@ const Hero: FC<Props> = (props) => {
               alt=""
               className="rounded-full ml-[-20px] "
             />
-            <p>
+            <p className="dark:text-white">
               500K+ People already trusted us.
               <Link
                 href={"/courses"}
-                className="dark:text-[#46e256] text-[crimson]"
+                className="dark:text-[#46e256] text-[crimson] ml-1"
               >
                 View Courses
               </Link>
@@ -72,3 +72,8 @@ const Hero: FC<Props> = (props) => {
 };
 
 export default Hero;
+
+// absolute top-[100px] 1000px:top-[unset] 1100px:h-[600px] 1100px:w-[600px] 1500px:h-[700px] 1500px:w-[700px] h-[50vh] w-[50vh]
+
+// 1000px:w-[40%] flex 1000px:min-h-screen items-center justify-end pt-[70px] 1000px:pt-[0] z-10 mt-[80px]
+
