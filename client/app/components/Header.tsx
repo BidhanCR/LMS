@@ -13,7 +13,10 @@ import { useSelector } from "react-redux";
 import avatar from "../../public/assets/ai.png";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { useSocialAuthMutation } from "@/redux/features/auth/authApi";
+import {
+  useLogOutQuery,
+  useSocialAuthMutation,
+} from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 
 type Props = {
@@ -28,20 +31,32 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
   const [active, setActive] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
   const { user } = useSelector((state: any) => state.auth);
-  const {data} = useSession();
-console.log(data)
-  const [socialAuth, {isSuccess, error}] = useSocialAuthMutation();
+  const { data } = useSession();
+  const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
+  const [logout, setLogout] = useState(false);
+  const {} = useLogOutQuery(undefined, {
+    skip: !logout ? true : false,
+  });
 
- useEffect(()=> {
-  if(!user){
-    if(data){
-      socialAuth({email: data?.user?.email, name:data?.user?.name, avatar:data?.user?.image})
+  useEffect(() => {
+    if (!user) {
+      if (data) {
+        socialAuth({
+          email: data?.user?.email,
+          name: data?.user?.name,
+          avatar: data?.user?.image,
+        });
+      }
     }
-  }
-  if(isSuccess){
-    toast.success("login successfully")
-  }
- }, [data, user])
+    if (data === null) {
+      if (isSuccess) {
+        toast.success("login successfully");
+      }
+    }
+    if (data === null) {
+      setLogout(true);
+    }
+  }, [data, user]);
 
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
@@ -94,9 +109,12 @@ console.log(data)
               {user ? (
                 <Link href={"/profile"}>
                   <Image
-                    src={user.avatar ? user.avatar : avatar}
+                    src={user.avatar ? user.avatar.url : avatar}
                     alt=""
+                    height={30}
+                    width={30}
                     className="w-[30px] h-[30px] rounded-full cursor-pointer hidden 800px:block"
+                    style={{border: activeItem === 5 ? "2px solid #37a39a": ""}}
                   />
                 </Link>
               ) : (
@@ -121,12 +139,12 @@ console.log(data)
               <NavItems activeItem={activeItem} isMobile={true} />
               {user ? (
                 <Link href={"/profile"}>
-                <Image
-                  src={user.avatar ? user.avatar : avatar}
-                  alt=""
-                  className="w-[30px] h-[30px] rounded-full cursor-pointer ml-5 my-2"
-                />
-              </Link>
+                  <Image
+                    src={user.avatar ? user.avatar : avatar}
+                    alt=""
+                    className="w-[30px] h-[30px] rounded-full cursor-pointer ml-5 my-2"
+                  />
+                </Link>
               ) : (
                 <HiOutlineUserCircle
                   size={25}
