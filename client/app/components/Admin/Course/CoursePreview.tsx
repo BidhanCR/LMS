@@ -1,5 +1,7 @@
 import { styles } from "@/app/styles/style";
 import CoursePlayer from "@/app/utils/CoursePlayer";
+import Ratings from "@/app/utils/Ratings";
+import {IoCheckmarkDoneOutline} from "react-icons/io5"
 import React, { FC } from "react";
 
 type Props = {
@@ -63,10 +65,36 @@ const CoursePreview: FC<Props> = ({
             Apply
           </div>
         </div>
-        <p className="pb-1">* Source code included</p>
-        <p className="pb-1">* Full lifetime access</p>
-        <p className="pb-1"> * Certification of completion</p>
-        <p className="pb-3 800px:pb-1"> * Premium Support</p>
+        <p className="pb-1 text-black dark:text-white">* Source code included</p>
+        <p className="pb-1 text-black dark:text-white">* Full lifetime access</p>
+        <p className="pb-1 text-black dark:text-white"> * Certification of completion</p>
+        <p className="pb-3 800px:pb-1 text-black dark:text-white"> * Premium Support</p>
+      </div>
+      <div className="w-full text-black dark:text-white">
+        <div className="w-full 800px:pr-5">
+          <h1 className="text-[25px] font-Poppins font-[600]">{courseData?.name}</h1>
+          <div className="flex items-center justify-between pt-3">
+            <div className="flex items-center">
+                <Ratings rating={0} />
+                <h5>0 Reviews</h5>
+            </div>
+            <h5>0 Student</h5>
+          </div>
+          <br />
+          <h1 className="text-[25px] font-Poppins font-[600]">What you will learn from this course?</h1>
+        </div>
+        {
+          courseData?.benefits?.map((item:any, index:number) => (
+            <div key={index} className="w-full flex 800px:items-center py-2">
+              <div className="w-[15px] mr-1">
+                <IoCheckmarkDoneOutline size={20} />
+              </div>
+              <p className="pl-2">
+                {item.title}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </div>
   );
