@@ -42,19 +42,29 @@ export const editCourse = CatchAsyncError(
     try {
       const data = req.body;
       const thumbnail = data.thumbnail;
+      const courseId = req.params.id;
+console.log(courseId);
+      const courseData = (await CourseModel.findById(courseId)) as any;
+      if (thumbnail && !thumbnail.startsWith("https")) {
+        await cloudinary.v2.uploader.destroy(courseData.thumbnail.public_id);
 
-      if (thumbnail) {
-        await cloudinary.v2.uploader.destroy(thumbnail.public_id);
         const myCloud = await cloudinary.v2.uploader.upload(thumbnail, {
           folder: "Courses",
         });
+
         data.thumbnail = {
           public_id: myCloud.public_id,
           url: myCloud.secure_url,
         };
       }
 
-      const courseId = req.params.id;
+      if (thumbnail.startsWith("https")) {
+        data.thumbnail = {
+          public_id: courseData?.thumbnail.public_id,
+          url: courseData?.thumbnail.url,
+        };
+      }
+
       const course = await CourseModel.findByIdAndUpdate(
         courseId,
         {
@@ -108,25 +118,26 @@ export const getSingleCourse = CatchAsyncError(
 export const getAllCourses = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const isCacheExist = await redis.get("allCourses");
-      if (isCacheExist) {
-        const courses = JSON.parse(isCacheExist);
+      const courses = await CourseModel.find().select(
+        "-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"
+      );
 
-        res.status(201).json({
-          success: true,
-          courses,
-        });
-      } else {
-        const courses = await CourseModel.find().select(
-          "-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"
-        );
+      await redis.set("allCourses", JSON.stringify(courses));
+      res.status(201).json({
+        success: true,
+        courses,
+      });
+      // const isCacheExist = await redis.get("allCourses");
+      // if (isCacheExist) {
+      //   const courses = JSON.parse(isCacheExist);
 
-        await redis.set("allCourses", JSON.stringify(courses));
-        res.status(201).json({
-          success: true,
-          courses,
-        });
-      }
+      //   res.status(201).json({
+      //     success: true,
+      //     courses,
+      //   });
+      // } else {
+
+      // }
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 500));
     }

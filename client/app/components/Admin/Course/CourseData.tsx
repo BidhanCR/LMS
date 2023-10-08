@@ -19,18 +19,20 @@ const CourseData: FC<Props> = ({
   active,
   setActive,
 }) => {
+  
   const handleBenefitChange = (index: number, value: any) => {
     const updatedBenefits = [...benefits];
-    updatedBenefits[index].title = value;
+    updatedBenefits[index] = { title: value };
     setBenefits(updatedBenefits);
   };
 
   const handleAddBenefits = () => {
     setBenefits([...benefits, { title: "" }]);
   };
+
   const handlePrerequisiteChange = (index: number, value: any) => {
     const updatedPrerequisites = [...prerequisites];
-    updatedPrerequisites[index].title = value;
+    updatedPrerequisites[index] = { title: value };
     setPrerequisites(updatedPrerequisites);
   };
 
@@ -43,12 +45,16 @@ const CourseData: FC<Props> = ({
   };
 
   const handleOptions = () => {
-    if(benefits[benefits.length -1].title !== "" && prerequisites[prerequisites.length - 1].title !== ""){
-      setActive(active + 1)
-    }else{
-      toast.error("Please fill the fields for go to next")
+    if (
+      benefits[benefits.length - 1].title !== "" &&
+      prerequisites[prerequisites.length - 1].title !== ""
+    ) {
+      setActive(active + 1);
+    } else {
+      toast.error("Please fill the fields for go to next");
     }
-  }
+  };
+  
   return (
     <div className="w-[80%] m-auto mt-24 block">
       <div className="">

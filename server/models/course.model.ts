@@ -98,6 +98,10 @@ const courseSchema = new Schema<ICourse>(
     estimatedPrice: {
       type: Number,
     },
+    demoUrl: {
+      type: String,
+      required: true
+    },
     thumbnail: {
       public_id: {
         type: String,

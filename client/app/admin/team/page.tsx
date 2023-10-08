@@ -1,13 +1,16 @@
-"use client";
-import React, { FC } from "react";
-import Heading from "../utils/Heading";
-import AdminSidebar from "../components/Admin/Sidebar/AdminSidebar";
-import AdminProtected from "../hooks/adminProtected";
-import DashboardHero from "../components/Admin/DashboardHero";
+"use client"
 
-type Props = {};
+import DashboardHero from '@/app/components/Admin/DashboardHero'
+import AdminSidebar from '@/app/components/Admin/Sidebar/AdminSidebar'
+import AllUsers from '@/app/components/Admin/Users/AllUsers'
+import AdminProtected from '@/app/hooks/adminProtected'
+import Heading from '@/app/utils/Heading'
+import React from 'react'
 
-const Page: FC<Props> = (props: Props) => {
+
+type Props = {}
+
+const Page = (props: Props) => {
   return (
     <div>
       <AdminProtected>
@@ -22,11 +25,12 @@ const Page: FC<Props> = (props: Props) => {
         </div>
         <div className="w-[85%]">
           <DashboardHero/>
+          <AllUsers isTeam={true}/>
         </div>
       </div>
       </AdminProtected>
     </div>
-  );
-};
+  )
+}
 
 export default Page;
