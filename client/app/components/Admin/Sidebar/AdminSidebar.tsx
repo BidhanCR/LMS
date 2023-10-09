@@ -190,13 +190,6 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
             <Typography variant="h6" sx={{ m: "15px 0 5px 20px" }}>
               Charts
@@ -237,6 +230,13 @@ const AdminSidebar = () => {
               title="Hero"
               to="/admin/hero"
               icon={<BarChartOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="FAQ Page"
+              to="/admin/faq"
+              icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
