@@ -152,20 +152,6 @@ const AdminSidebar = () => {
               Data
             </Typography>
             <Item
-              title="Manage Team"
-              to="/admin/team"
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Create Course"
-              to="/admin/create-course"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
               title="All Users"
               to="/admin/users"
               icon={<ReceiptOutlinedIcon />}
@@ -173,9 +159,34 @@ const AdminSidebar = () => {
               setSelected={setSelected}
             />
 
+            <Item
+              title="Invoices"
+              to="/admin/invoices"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            
             <Typography variant="h6" sx={{ m: "15px 0 5px 20px" }}>
-              Pages
+              Content
             </Typography>
+            <Item
+              title="Create Course"
+              to="/admin/create-course"
+              icon={<ContactsOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography variant="h6" sx={{ m: "15px 0 5px 20px" }}>
+              Controllers
+            </Typography>
+            <Item
+              title="Manage Team"
+              to="/admin/team"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Item
               title="All Courses"
               to="/admin/courses"
@@ -183,42 +194,28 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
             <Typography variant="h6" sx={{ m: "15px 0 5px 20px" }}>
-              Charts
+              Analytics
             </Typography>
             <Item
-              title="Bar Chart"
-              to="/bar"
+              title="Courses Analytics"
+              to="/admin/course-analytics"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Pie Chart"
-              to="/pie"
+              title="Users Analytics"
+              to="/admin/users-analytics"
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Line Chart"
-              to="/line"
+              title="Orders Analytics"
+              to="/admin/orders-analytics"
               icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
