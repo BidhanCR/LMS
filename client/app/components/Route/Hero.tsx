@@ -1,3 +1,4 @@
+import { useGetHeroDataQuery } from "@/redux/features/layout/layoutApi";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
@@ -5,24 +6,26 @@ import { BiSearch } from "react-icons/bi";
 type Props = {};
 
 const Hero: FC<Props> = (props) => {
+  const { data } = useGetHeroDataQuery("Banner", {});
   return (
     <div className="w-full items-center">
       <div className="flex flex-col md:flex-row items-center justify-center">
         <div className="w-full hero_animation md:w-[40%] flex items-center justify-center">
           <Image
-            src={require("../../../public/assets/banner-img-1.png")}
+            src={data?.layout?.banner?.image?.url}
             alt=""
+            height={450}
+            width={450}
             className="object-contain rounded-full"
           />
         </div>
         <div className="w-full md:w-[60%] flex flex-col items-center text-center mt-[150px]">
           <h2 className="dark:text-white text-[#000000c7] text-[30px] px-3 w-full  font-[600] font-Josefin py-2 leading-[75px]">
-            Improve Your Online Learning Experience Better Instantly
+           {data?.layout?.banner?.title}
           </h2>
           <br />
           <p className="dark:text-[#edfff4] text-[#000000ac] font-Josefin font-[600] text-[18px]">
-            We have 40k+ Online courses & 500K+ Online registered student. Find
-            Your desired courses from them.
+          {data?.layout?.banner?.subTitle}
           </p>
           <br />
           <br />
@@ -76,4 +79,3 @@ export default Hero;
 // absolute top-[100px] 1000px:top-[unset] 1100px:h-[600px] 1100px:w-[600px] 1500px:h-[700px] 1500px:w-[700px] h-[50vh] w-[50vh]
 
 // 1000px:w-[40%] flex 1000px:min-h-screen items-center justify-end pt-[70px] 1000px:pt-[0] z-10 mt-[80px]
-

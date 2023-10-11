@@ -164,7 +164,7 @@ const CourseInformation: FC<Props> = ({
             >
               <option>Select Category</option>
               {categories.map((item: any) => (
-                <option value={item._id} key={item._id} className="dark:bg-gray-700">
+                <option value={item.title} key={item._id} className="dark:bg-gray-700">
                   {item.title}
                 </option>
               ))}

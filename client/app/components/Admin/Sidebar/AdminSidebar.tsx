@@ -147,6 +147,13 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title="Home"
+              to="/"
+              icon={<HomeOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
 
             <Typography variant="h6" sx={{ m: "15px 0 5px 20px" }}>
               Data

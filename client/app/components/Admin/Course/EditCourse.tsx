@@ -47,6 +47,7 @@ const EditCourse:FC<Props> = ({id}) => {
             tags: editCourseData.tags,
             level: editCourseData.level,
             demoUrl: editCourseData.demoUrl,
+            category: editCourseData.category,
             thumbnail: editCourseData?.thumbnail?.url
         })
         setBenefits(editCourseData.benefits);
@@ -60,6 +61,7 @@ const EditCourse:FC<Props> = ({id}) => {
     price: "",
     estimatedPrice: "",
     tags: "",
+    category:"",
     level: "",
     demoUrl: "",
     thumbnail: "",
@@ -118,6 +120,7 @@ const EditCourse:FC<Props> = ({id}) => {
       price: courseInfo.price,
       estimatedPrice: courseInfo.estimatedPrice,
       tags: courseInfo.tags,
+      category: courseInfo.category,
       thumbnail: courseInfo.thumbnail,
       level: courseInfo.level,
       demoUrl: courseInfo.demoUrl,
