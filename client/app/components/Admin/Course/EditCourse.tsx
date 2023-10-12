@@ -74,6 +74,7 @@ const EditCourse:FC<Props> = ({id}) => {
     {
       videoUrl: "",
       title: "",
+      videoLength: "",
       description: "",
       videoSection: "Untitled Section",
       links: [
@@ -103,6 +104,7 @@ const EditCourse:FC<Props> = ({id}) => {
       (courseContent) => ({
         videoUrl: courseContent.videoUrl,
         title: courseContent.title,
+        videoLength: courseContent.videoLength,
         description: courseContent.description,
         videoSection: courseContent.videoSection,
         links: courseContent.links.map((link) => ({
