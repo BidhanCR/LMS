@@ -9,14 +9,14 @@ type Props = {
   isDemo?: boolean;
 };
 
-const CourseContentList: FC<Props> = (props) => {
+const CourseContentList: FC<Props> = ({data, activeVideo, setActiveVideo, isDemo}) => {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(
     new Set<string>()
   );
 
   //   Find unique video sections
   const videoSections: string[] = [
-    ...new Set<string>(props.data?.map((item: any) => item.videoSection)),
+    ...new Set<string>(data?.map((item: any) => item.videoSection)),
   ];
 
   let totalCount: number = 0;
@@ -34,14 +34,14 @@ const CourseContentList: FC<Props> = (props) => {
   return (
     <div
       className={`mt-[15px] w-ful ${
-        !props.isDemo && "ml-[-38px] sticky top-24 left-0 z-20"
+        !isDemo && "ml-[-38px] sticky top-24 left-0 z-20"
       }`}
     >
       {videoSections.map((section: string, sectionIndex: number) => {
         const isSectionVisible = visibleSections.has(section);
 
         // filter videos by section
-        const sectionVideos: any[] = props.data.filter(
+        const sectionVideos: any[] = data.filter(
           (item: any) => item.videoSection === section
         );
 
@@ -53,15 +53,13 @@ const CourseContentList: FC<Props> = (props) => {
           0
         );
 
-        console.log(sectionVideoLength);
-
         const sectionStartIndex: number = totalCount;
         totalCount += sectionVideoCount;
         const sectionContentHours: number = sectionVideoLength / 60;
         return (
           <div
             key={section}
-            className={`${!props.isDemo && "border-b border-[#ffffff8e] pb-2"}`}
+            className={`${!isDemo && "border-b border-[#ffffff8e] pb-2"}`}
           >
             <div className="w-full flex">
               {/* Render video section */}
@@ -98,8 +96,9 @@ const CourseContentList: FC<Props> = (props) => {
                     <div
                       key={item._id}
                       className={`${
-                        videoIndex === props.activeVideo ? "bg-slate-800" : ""
+                        videoIndex === activeVideo ? "bg-slate-800" : ""
                       } cursor-pointer transition-all p-2 w-full`}
+                      onClick={()=> setActiveVideo(videoIndex)}
                     >
                       <div className="flex items-start">
                         <div>
