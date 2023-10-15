@@ -20,6 +20,7 @@ type Props = {
 const CourseDetails: FC<Props> = ({ data, stripePromise, clientSecret }) => {
   const {data: userData} = useLoadUserQuery(undefined, {});
   const user = userData?.user;
+  // console.log(userData?.user);
   const [open, setOpen] = useState(false);
   const discountPercentage =
     ((data?.estimatedPrice - data?.price) / data?.estimatedPrice) * 100;
