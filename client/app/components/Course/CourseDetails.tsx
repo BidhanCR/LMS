@@ -7,9 +7,11 @@ import { IoCheckmarkDoneCircle, IoCloseOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { format } from "timeago.js";
 import CourseContentList from "./CourseContentList";
-import {Elements} from "@stripe/react-stripe-js"
+import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "../Payment/CheckOutForm";
 import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
+import Image from "next/image";
+import { VscVerifiedFilled } from "react-icons/vsc";
 
 type Props = {
   data: any;
@@ -18,7 +20,7 @@ type Props = {
 };
 
 const CourseDetails: FC<Props> = ({ data, stripePromise, clientSecret }) => {
-  const {data: userData} = useLoadUserQuery(undefined, {});
+  const { data: userData } = useLoadUserQuery(undefined, {});
   const user = userData?.user;
   // console.log(userData?.user);
   const [open, setOpen] = useState(false);
@@ -120,41 +122,85 @@ const CourseDetails: FC<Props> = ({ data, stripePromise, clientSecret }) => {
                     Course Rating * {data?.reviews?.length} Reviews
                   </h5>
                 </div>
-                <br />
-                {(data?.reviews && [...data.reviews].reverse()).map(
-                  (item: any, index: number) => (
-                    <div key={index} className="w-full pb-4">
-                      <div className="flex">
-                        <div className="w-[50px] h-[50px]">
-                          <div className="w-[50px] h-[50px] bg-slate-600 rounded-[50px] flex items-center justify-center cursor-pointer">
-                            <h1 className="uppercase text-[18px] text-black dark:text-white">
-                              {item.user.name.slice(0, 2)}
-                            </h1>
-                          </div>
-                        </div>
-                        <div className="hidden 800px:block pl-2">
-                          <div className="flex items-center">
-                            <h5 className="text-[10px] pr-2 text-black dark:text-white">
-                              {item.user.name}
-                            </h5>
-                            <Ratings rating={item.rating} />
-                          </div>
-                          <p className="text-black dark:text-white">
-                            {item.comment}
-                          </p>
-                          <small>{format(item.createdAt)}</small>
-                        </div>
-                        <div className="pl-2 flex 800px:hidden items-center">
-                          <h5 className="text-[18px] pr-2 text-black dark:text-white">
+              </div>
+              <br />
+              {(data?.reviews && [...data.reviews].reverse()).map(
+                (item: any, index: number) => (
+                  <div key={index} className="w-full pb-4">
+                    <div className="flex">
+                      <div className="w-[50px] h-[50px]">
+                        <Image
+                          src={
+                            item.user.avatar
+                              ? item.user.avatar.url
+                              : "https://res.cloudinary.com/dshp9jnuy/image/upload/v1665822253/avatars/nrxsg8sd9iy10bbsoenn.png"
+                          }
+                          alt="profile-image"
+                          width={50}
+                          height={50}
+                          className="w-[50px] h-[50px] rounded-full object-cover"
+                        />
+                      </div>
+                      <div className="hidden 800px:block pl-2">
+                        <div className="flex items-center">
+                          <h5 className="text-[10px] pr-2 text-black dark:text-white">
                             {item.user.name}
                           </h5>
                           <Ratings rating={item.rating} />
                         </div>
+                        <p className="text-black dark:text-white">
+                          {item.comment}
+                        </p>
+                        <small>{format(item.createdAt)}</small>
+                      </div>
+                      <div className="pl-2 flex 800px:hidden items-center">
+                        <h5 className="text-[18px] pr-2 text-black dark:text-white">
+                          {item.user.name}
+                        </h5>
+                        <Ratings rating={item.rating} />
                       </div>
                     </div>
-                  )
-                )}
-              </div>
+                      {item.commentReplies.map((i: any, index: number) => (
+                        <div
+                          className="w-full 800px:ml-16 my-5 text-black dark:text-white flex"
+                          key={index}
+                        >
+                          <div>
+                            <Image
+                              src={
+                                i.user.avatar
+                                  ? i.user.avatar.url
+                                  : "https://res.cloudinary.com/dshp9jnuy/image/upload/v1665822253/avatars/nrxsg8sd9iy10bbsoenn.png"
+                              }
+                              alt="profile-image"
+                              width={50}
+                              height={50}
+                              className="w-[50px] h-[50px] rounded-full object-cover"
+                            />
+                          </div>
+                          <div className="pl-3">
+                            <div className="flex items-center">
+                              <h5 className="text-[20px] text-black dark:text-white">
+                                {i?.user.name}
+                              </h5>
+                              <VscVerifiedFilled
+                                className={`text-green-500 ml-1 text-[20px] ${
+                                  i.user.role !== "admin" && "hidden"
+                                }`}
+                              />
+                            </div>
+                            <p className="text-black dark:text-white">
+                              {i?.comment}
+                            </p>
+                            <small className="text-black dark:text-[#ffffff83]">
+                              {format(i?.createdAt)}
+                            </small>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                )
+              )}
             </div>
           </div>
           <div className="w-full 800px:w-[35%] relative">
@@ -216,13 +262,11 @@ const CourseDetails: FC<Props> = ({ data, stripePromise, clientSecret }) => {
                 />
               </div>
               <div>
-                {
-                  stripePromise && clientSecret && (
-                    <Elements stripe={stripePromise} options={{clientSecret}}>
-                        <CheckOutForm setOpen={setOpen} data={data} />
-                    </Elements>
-                  )
-                }
+                {stripePromise && clientSecret && (
+                  <Elements stripe={stripePromise} options={{ clientSecret }}>
+                    <CheckOutForm setOpen={setOpen} data={data} />
+                  </Elements>
+                )}
               </div>
             </div>
           </div>
