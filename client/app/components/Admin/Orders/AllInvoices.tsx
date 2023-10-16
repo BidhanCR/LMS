@@ -76,64 +76,7 @@ const AllInvoices = ({ isDashboard }: Props) => {
         ]),
   ];
 
-  const rows: any = [
-    {
-      id: "3464646",
-      userName: "Bidhan Roy",
-      userEmail: "program@gmail.com",
-      title: "React Js Course",
-      price: "50000",
-      created_at: "2 day ago",
-    },
-    {
-      id: "3464646",
-      userName: "Bidhan Roy",
-      userEmail: "program@gmail.com",
-      title: "React Js Course",
-      price: "50000",
-      created_at: "2 day ago",
-    },
-    {
-      id: "3464646",
-      userName: "Bidhan Roy",
-      userEmail: "program@gmail.com",
-      title: "React Js Course",
-      price: "50000",
-      created_at: "2 day ago",
-    },
-    {
-      id: "3464646",
-      userName: "Bidhan Roy",
-      userEmail: "program@gmail.com",
-      title: "React Js Course",
-      price: "50000",
-      created_at: "2 day ago",
-    },
-    {
-      id: "3464646",
-      userName: "Bidhan Roy",
-      userEmail: "program@gmail.com",
-      title: "React Js Course",
-      price: "50000",
-      created_at: "2 day ago",
-    },
-    {
-      id: "3464646",
-      userName: "Bidhan Roy",
-      userEmail: "program@gmail.com",
-      title: "React Js Course",
-      price: "50000",
-      created_at: "2 day ago",
-    },
-    {
-      id: "3464646",
-      userName: "Bidhan Roy",
-      userEmail: "program@gmail.com",
-      title: "React Js Course",
-      price: "50000",
-      created_at: "2 day ago",
-    },
-  ];
+  const rows: any = [];
 
   orderData &&
     orderData.forEach((item: any) => {
@@ -206,10 +149,10 @@ const AllInvoices = ({ isDashboard }: Props) => {
             }}
           >
             <DataGrid
-            checkboxSelection={isDashboard ? false : true}
-            rows={rows}
-            columns={columns}
-            components={isDashboard ? {}: {Toolbar: GridToolbar}}
+              checkboxSelection={isDashboard ? false : true}
+              rows={rows}
+              columns={columns}
+              components={isDashboard ? {} : { Toolbar: GridToolbar }}
             />
           </Box>
         </Box>

@@ -41,7 +41,7 @@ input::-webkit-inner-spin-button {
 ::-webkit-scrollbar-track:hover {
   background: #32ae7e;
 }
-*/
+
 
 ::-webkit-scrollbar-thumb::before,
 ::-webkit-scrollbar-thumb::after {

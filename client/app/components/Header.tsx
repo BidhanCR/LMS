@@ -33,7 +33,11 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
   const [openSidebar, setOpenSidebar] = useState(false);
   // const { user } = useSelector((state: any) => state.auth);
 
-  const {data:userData, isLoading, refetch} = useLoadUserQuery(undefined, {refetchOnMountOrArgChange:true});
+  const {
+    data: userData,
+    isLoading,
+    refetch,
+  } = useLoadUserQuery(undefined, { refetchOnMountOrArgChange: true });
   const { data } = useSession();
   const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
   const [logout, setLogout] = useState(false);
@@ -42,7 +46,7 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
   });
 
   useEffect(() => {
-    if(!isLoading){
+    if (!isLoading) {
       if (!userData) {
         if (data) {
           socialAuth({
@@ -62,7 +66,7 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
         setLogout(true);
       }
     }
-  }, [isLoading,data, userData, isSuccess, socialAuth, refetch]);
+  }, [isLoading, data, userData, isSuccess, socialAuth, refetch]);
 
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
@@ -115,12 +119,16 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
               {userData ? (
                 <Link href={"/profile"}>
                   <Image
-                    src={userData?.user.avatar ? userData?.user.avatar.url : avatar}
+                    src={
+                      userData?.user.avatar ? userData?.user.avatar.url : avatar
+                    }
                     alt=""
                     height={30}
                     width={30}
                     className="w-[30px] h-[30px] rounded-full cursor-pointer hidden 800px:block"
-                    style={{border: activeItem === 5 ? "2px solid #37a39a": ""}}
+                    style={{
+                      border: activeItem === 5 ? "2px solid #37a39a" : "",
+                    }}
                   />
                 </Link>
               ) : (
@@ -146,15 +154,22 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
               {userData ? (
                 <Link href={"/profile"}>
                   <Image
-                    src={userData?.user.avatar ? userData?.user.avatar : avatar}
+                    src={
+                      userData?.user.avatar ? userData?.user.avatar.url : avatar
+                    }
                     alt=""
-                    className="w-[30px] h-[30px] rounded-full cursor-pointer ml-5 my-2"
+                    height={30}
+                    width={30}
+                    className="w-[30px] h-[30px] rounded-full cursor-pointer ml-[25px]"
+                    style={{
+                      border: activeItem === 5 ? "2px solid #37a39a" : "",
+                    }}
                   />
                 </Link>
               ) : (
                 <HiOutlineUserCircle
                   size={25}
-                  className="ml-5 my-2 cursor-pointer dark:text-white text-black"
+                  className="hidden 800px:block cursor-pointer dark:text-white text-black"
                   onClick={() => setOpen(true)}
                 />
               )}
@@ -190,7 +205,7 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
               setOpen={setOpen}
               setRoute={setRoute}
               activeItem={activeItem}
-              component={SignUp} 
+              component={SignUp}
             />
           )}
         </>

@@ -333,6 +333,7 @@ const CourseContentMedia = ({
               setAnswer={setAnswer}
               handleAnswerSubmit={handleAnswerSubmit}
               user={user}
+              questionId={questionId}
               setQuestionId={setQuestionId}
             />
           </div>
@@ -442,7 +443,7 @@ const CourseContentMedia = ({
                       </small>
                     </div>
                   </div>
-                  {user.role === "admin" && (
+                  {user.role === "admin" && item.commentReplies.length === 0 && (
                     <span
                       className={`${styles.label} cursor-pointer !ml-10`}
                       onClick={() => {
@@ -454,7 +455,7 @@ const CourseContentMedia = ({
                     </span>
                   )}
 
-                  {isReviewReply && (
+                  {isReviewReply && reviewId === item._id && (
                     <div className="w-full flex relative">
                       <input
                         type="text"
@@ -532,6 +533,7 @@ const CommentReply = ({
   setAnswer,
   handleAnswerSubmit,
   user,
+  questionId,
   setQuestionId,
   answerCreationLoading,
 }: any) => {
@@ -546,6 +548,7 @@ const CommentReply = ({
             item={item}
             index={index}
             answer={answer}
+            questionId={questionId}
             setAnswer={setAnswer}
             setQuestionId={setQuestionId}
             handleAnswerSubmit={handleAnswerSubmit}
@@ -559,6 +562,7 @@ const CommentReply = ({
 
 const CommentItem = ({
   data,
+  questionId,
   setQuestionId,
   item,
   index,
@@ -620,7 +624,7 @@ const CommentItem = ({
             {item.questionReplies.length}
           </span>
         </div>
-        {replyActive && (
+        {replyActive && questionId === item._id && (
           <>
             {item.questionReplies.map((item: any, index: number) => (
               <div
