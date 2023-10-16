@@ -2,7 +2,7 @@ import { styles } from "@/app/styles/style";
 import CoursePlayer from "@/app/utils/CoursePlayer";
 import Ratings from "@/app/utils/Ratings";
 import Link from "next/link";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { IoCheckmarkDoneCircle, IoCloseOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { format } from "timeago.js";
@@ -17,13 +17,26 @@ type Props = {
   data: any;
   clientSecret: string;
   stripePromise: any;
+  setRoute: any;
+  setOpen: any;
 };
 
-const CourseDetails: FC<Props> = ({ data, stripePromise, clientSecret }) => {
+const CourseDetails: FC<Props> = ({
+  data,
+  stripePromise,
+  clientSecret,
+  setRoute,
+  setOpen: openAuthModal,
+}) => {
   const { data: userData } = useLoadUserQuery(undefined, {});
-  const user = userData?.user;
+  // const user = userData?.user;
   // console.log(userData?.user);
+  const [user, setUser]= useState<any>();
   const [open, setOpen] = useState(false);
+
+  useEffect(()=> {
+    setUser(userData?.user)
+  }, [userData])
   const discountPercentage =
     ((data?.estimatedPrice - data?.price) / data?.estimatedPrice) * 100;
 
@@ -32,7 +45,12 @@ const CourseDetails: FC<Props> = ({ data, stripePromise, clientSecret }) => {
   const isPurchased =
     user && user?.courses.find((item: any) => item._id === data._id);
   const handleOrder = (e: any) => {
-    setOpen(true);
+    if (user) {
+      setOpen(true);
+    } else {
+      setRoute("Login");
+      openAuthModal(true);
+    }
   };
   // console.log(data)
   return (
@@ -160,44 +178,44 @@ const CourseDetails: FC<Props> = ({ data, stripePromise, clientSecret }) => {
                         <Ratings rating={item.rating} />
                       </div>
                     </div>
-                      {item.commentReplies.map((i: any, index: number) => (
-                        <div
-                          className="w-full 800px:ml-16 my-5 text-black dark:text-white flex"
-                          key={index}
-                        >
-                          <div>
-                            <Image
-                              src={
-                                i.user.avatar
-                                  ? i.user.avatar.url
-                                  : "https://res.cloudinary.com/dshp9jnuy/image/upload/v1665822253/avatars/nrxsg8sd9iy10bbsoenn.png"
-                              }
-                              alt="profile-image"
-                              width={50}
-                              height={50}
-                              className="w-[50px] h-[50px] rounded-full object-cover"
+                    {item.commentReplies.map((i: any, index: number) => (
+                      <div
+                        className="w-full 800px:ml-16 my-5 text-black dark:text-white flex"
+                        key={index}
+                      >
+                        <div>
+                          <Image
+                            src={
+                              i.user.avatar
+                                ? i.user.avatar.url
+                                : "https://res.cloudinary.com/dshp9jnuy/image/upload/v1665822253/avatars/nrxsg8sd9iy10bbsoenn.png"
+                            }
+                            alt="profile-image"
+                            width={50}
+                            height={50}
+                            className="w-[50px] h-[50px] rounded-full object-cover"
+                          />
+                        </div>
+                        <div className="pl-3">
+                          <div className="flex items-center">
+                            <h5 className="text-[20px] text-black dark:text-white">
+                              {i?.user.name}
+                            </h5>
+                            <VscVerifiedFilled
+                              className={`text-green-500 ml-1 text-[20px] ${
+                                i.user.role !== "admin" && "hidden"
+                              }`}
                             />
                           </div>
-                          <div className="pl-3">
-                            <div className="flex items-center">
-                              <h5 className="text-[20px] text-black dark:text-white">
-                                {i?.user.name}
-                              </h5>
-                              <VscVerifiedFilled
-                                className={`text-green-500 ml-1 text-[20px] ${
-                                  i.user.role !== "admin" && "hidden"
-                                }`}
-                              />
-                            </div>
-                            <p className="text-black dark:text-white">
-                              {i?.comment}
-                            </p>
-                            <small className="text-black dark:text-[#ffffff83]">
-                              {format(i?.createdAt)}
-                            </small>
-                          </div>
+                          <p className="text-black dark:text-white">
+                            {i?.comment}
+                          </p>
+                          <small className="text-black dark:text-[#ffffff83]">
+                            {format(i?.createdAt)}
+                          </small>
                         </div>
-                      ))}
+                      </div>
+                    ))}
                   </div>
                 )
               )}

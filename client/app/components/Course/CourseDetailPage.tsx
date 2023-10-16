@@ -39,10 +39,10 @@ const CourseDetailPage = ({ id }: Props) => {
   }, [config, data, createPaymentIntent]);
 
   useEffect(() => {
-    if(paymentIntentData){
-      setClientSecret(paymentIntentData?.client_secret)
+    if (paymentIntentData) {
+      setClientSecret(paymentIntentData?.client_secret);
     }
-  }, [paymentIntentData])
+  }, [paymentIntentData]);
   return (
     <>
       {isLoading ? (
@@ -63,11 +63,15 @@ const CourseDetailPage = ({ id }: Props) => {
             setOpen={setOpen}
             activeItem={1}
           />
-          {
-            stripePromise && (
-              <CourseDetails data={data.course} stripePromise={stripePromise} clientSecret={clientSecret} />
-            )
-          }
+          {stripePromise && (
+            <CourseDetails
+              data={data.course}
+              stripePromise={stripePromise}
+              clientSecret={clientSecret}
+              setRoute={setRoute}
+              setOpen={setOpen}
+            />
+          )}
           <Footer />
         </div>
       )}
