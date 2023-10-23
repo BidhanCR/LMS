@@ -15,42 +15,20 @@ Our mission is to democratize education and make it accessible to anyone, anywhe
 
 **Features:**
 
-- **User Registration and Login**: Secure authentication and password recovery mechanisms.
-- **Search and Filter Options**: Find servicing centers based on location and service type.
-- **Motor Servicing Centers Profile**: Detailed profiles with contact info, reviews, and more.
-- **Appointment Booking**: Book appointments with preferred centers.
-- **Real-time Tracking**: Track appointment status in real-time.
-- **Ratings and Reviews**: Rate and review servicing centers.
-- **Payment Integration**: Make secure online payments.
-- **Service Reminders**: Timely service reminders.
-- **Service Discounts and Offers**: Special offers from servicing centers.
-- **Customer Support**: Dedicated customer support system.
-- **Geolocation Integration**: Find nearby servicing centers.
-- **Multi-language Support**: Available in multiple languages.
-- **Mobile Responsive Design**: Seamlessly accessible on mobile devices.
-- **Social Media Integration**: Share experiences on social media.
-- **Service Package Recommendations**: Suggest servicing packages.
+- **User Registration and Login**: Token-Based Email Verification Authentication System and social login with Google and Github.
+- **Course Searching and Filter Options**: Find courses based on search text and categories.
+- **Enrolling in Courses**: Implement custom logic for users to enroll in courses by paying(stripe payment method).
+- **Course Ratings and Reviews**: user can review and rating courses.
+- **Question and Answer System**: user can ask questions for indivisual video and other users and admin can reply.
+- **Admin Dashboard**: admin dashboard that allows administrators to manage users, courses, layouts, and more.
+- **Course Creation, edit and delete**: Admin can create course, edit and delete.
+- **Customization**: admin interface for customizing the website hero, faq and categories.
 - **Push Notifications**: Keep users informed.
-- **Vehicle Maintenance History**: Digital vehicle servicing history.
-- **Service Center Verification**: Authenticate servicing centers.
-- **Service Center Dashboard**: Centers manage bookings, services, and reviews.
-- **Service Center Ratings and Analytics**: Insights into center performance.
-- **Online Chat Support**: Real-time assistance.
-- **Service Center Availability Calendar**: Easy booking with a calendar view.
-- **Loyalty Rewards Program**: Reward frequent users.
-- **Vehicle Diagnostics**: Diagnose common issues.
-- **Integration with Spare Part Suppliers**: Connect users with suppliers.
-- **Service Center Comparison**: Compare centers.
-- **Service Center Certification Badges**: Display certified centers.
 - **User Dashboard**: Personalized preferences and settings.
-- **Service Center Promotions**: Run promotional campaigns.
-- **Multi-platform Accessibility**: Web, Android, and iOS apps.
-- MongoDB & mongoose connect, Database creation
-- Authentication with Firebase, Google Login
-- Full responsiveness on all pages
-- Cookie-based authentication
+- **Database Connection**: MongoDB & mongoose connection.
+- **Responsiveness**: Full responsiveness on all pages.
 - API and Controllers creation
 - Design using TailwindCSS
-- 
 - Redux Toolkit state management
+- others
 
