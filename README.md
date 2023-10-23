@@ -23,7 +23,7 @@ Our mission is to democratize education and make it accessible to anyone, anywhe
 - **Admin Dashboard**: admin dashboard that allows administrators to manage users, courses, layouts, and more.
 - **Course Creation, edit and delete**: Admin can create course, edit and delete.
 - **Customization**: admin interface for customizing the website hero, faq and categories.
-- **Push Notifications**: Keep users informed.
+- **Notifications**: Real-time Notification on Admin dashboard for user's order creation, asking questions etc.
 - **User Dashboard**: Personalized preferences and settings.
 - **Database Connection**: MongoDB & mongoose connection.
 - **Responsiveness**: Full responsiveness on all pages.
@@ -32,3 +32,28 @@ Our mission is to democratize education and make it accessible to anyone, anywhe
 - Redux Toolkit state management
 - others
 
+**Technology Used:**
+- Next Js
+- next-auth
+- next-themes
+- react-hot-toast
+- react-icons
+- react-pro-sidebar
+- redux-toolkit
+- recharts
+- socket.io
+- tailwindcss
+- timeago.js
+- typescript
+- bcryptjs
+- cloudinary
+- cookie-parser
+- cors
+- dotenv
+- ejs
+- express
+- jsonwebtoken
+- mongoose
+- nodemailer
+- stripe
+- others
